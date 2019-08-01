@@ -1,0 +1,50 @@
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { someAction } from '../../redux/reducers/common';
+import { string, number, func } from 'prop-types';
+import cn from 'classnames';
+
+import s from './{{pascalCase name}}.css';
+
+export class {{pascalCase name}} extends PureComponent {
+  static propTypes = {
+    /** Class dropped by component's parent (BEM mixing) */
+    className: string,
+    /** Redux store field */
+    counter: number,
+    /** Redux action */
+    clickHandler: func,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
+
+  state = {
+    // configure initial state here
+  };
+
+  render() {
+    const { className, counter, clickHandler } = this.props;
+    // const {} = this.state;
+
+    return (
+      <div className={cn(s.root, className)}>
+        {/* component content */}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  counter: state.common.someCounter,
+});
+
+const mapDispatchToProps = {
+  clickHandler: someAction,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)({{pascalCase name}});

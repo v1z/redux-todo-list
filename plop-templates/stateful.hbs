@@ -1,0 +1,31 @@
+import React, { PureComponent } from 'react';
+import { string } from 'prop-types';
+import cn from 'classnames';
+
+import s from './{{pascalCase name}}.css';
+
+export default class {{pascalCase name}} extends PureComponent {
+  static propTypes = {
+    /** Class dropped by component's parent (BEM mixing) */
+    className: string,
+  };
+
+  static defaultProps = {
+    className: '',
+  };
+
+  state = {
+    // configure initial state here
+  };
+
+  render() {
+    const { className } = this.props;
+    // const {} = this.state;
+
+    return (
+      <div className={cn(s.root, className)}>
+        {/* component content */}
+      </div>
+    );
+  }
+}

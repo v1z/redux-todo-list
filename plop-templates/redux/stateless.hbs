@@ -1,0 +1,37 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { someAction } from '../../redux/reducers/common';
+import { string, number, func } from 'prop-types';
+import cn from 'classnames';
+
+import s from './{{pascalCase name}}.css';
+
+const propTypes = {
+  /** Class dropped by component's parent (BEM mixing) */
+  className: string,
+  /** Redux store field */
+  counter: number,
+  /** Redux action */
+  clickHandler: func,
+};
+
+export const {{pascalCase name}} = ({ className = '', clickHandler, counter }) => (
+  <div className={cn(s.root, className)}>
+    {/* component content */}
+  </div>
+);
+
+{{pascalCase name}}.propTypes = propTypes;
+
+const mapStateToProps = state => ({
+  counter: state.common.someCounter,
+});
+
+const mapDispatchToProps = {
+  clickHandler: someAction,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)({{pascalCase name}});
