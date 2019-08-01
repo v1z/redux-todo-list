@@ -1,18 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeTask } from '../../redux/actions';
+import { removeTask, toggleTaskState } from '../../redux/actions';
+import { filteredTasksSelector } from '../../redux/selectors';
 
-export const Tasks = ({ removeTask, tasks }) => {
+export const Tasks = ({ removeTask, toggleTaskState, tasks }) => {
   const handleRemoveTask = id => () => {
     removeTask({ id });
   };
 
-  return tasks.length === 0 ? null : (
+  const handleToggleTaskState = id => () => {
+    toggleTaskState({ id });
+  };
+
+  return (
     <div className="mt-3">
       <ul className="list-group">
-        {tasks.map(({ id, text }) => (
+        {tasks.map(({ id, text, state }) => (
           <li key={id} className="list-group-item d-flex">
-            <span className="mr-auto">{text}</span>
+            <span className="mr-auto">
+              <button type="button" className="btn btn-link" onClick={handleToggleTaskState(id)}>
+                {state === 'active' ? text : <s>{text}</s>}
+              </button>
+            </span>
             <button type="button" className="close" onClick={handleRemoveTask(id)}>
               <span>&times;</span>
             </button>
@@ -24,11 +33,12 @@ export const Tasks = ({ removeTask, tasks }) => {
 };
 
 const mapStateToProps = state => ({
-  tasks: state.tasks,
+  tasks: filteredTasksSelector(state),
 });
 
 const mapDispatchToProps = {
   removeTask,
+  toggleTaskState,
 };
 
 export default connect(

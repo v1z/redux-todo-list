@@ -6,7 +6,7 @@ import { updateNewTaskText, addTask } from '../../redux/actions';
 export const NewTaskForm = ({ text, updateNewTaskText, addTask }) => {
   const handleAddTask = e => {
     e.preventDefault();
-    const task = { text, id: _.uniqueId() };
+    const task = { text, id: _.uniqueId(), state: 'active' };
     addTask({ task });
   };
 
