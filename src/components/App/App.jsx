@@ -1,11 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { MainPage } from '../pages/MainPage';
+import { NewTaskForm } from '../NewTaskForm';
+import { Tasks } from '../Tasks';
 
 export default () => (
-  <Router>
-    <Switch>
-      <Route path="/" component={MainPage} />
-    </Switch>
-  </Router>
+  <div className="col-5">
+    <NewTaskForm />
+    <Tasks />
+  </div>
 );
